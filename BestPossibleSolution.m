@@ -1,5 +1,6 @@
 % The Objective of this mat file is to graphically show how the Projection
-% of the vector b onto A's column space gives the best solution to Ax = b
+% of the vector b onto A's column space gives the best solution 
+% (i.e. least square) to Ax = b
 % In the case of a Rectangular or Singular b.
 
 % Let this be a m*n matrix (m equations & n unknowns system)
