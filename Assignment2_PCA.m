@@ -17,30 +17,32 @@ scatter(cluster4(1,:), cluster4(2,:), 'c');
 hold on;
 legend('cluster 1','cluster 2','cluster 3','cluster 4');
 
-% Centre the data at origin
-cluster1 = bsxfun(@minus,cluster1,sum(cluster1,2)/length(cluster1'));
-cluster2 = bsxfun(@minus,cluster2,sum(cluster2,2)/length(cluster2'));
-cluster3 = bsxfun(@minus,cluster3,sum(cluster3,2)/length(cluster3'));
-cluster4 = bsxfun(@minus,cluster4,sum(cluster4,2)/length(cluster4'));
+% number of data vectors - 13*4
+n = 52;
+% number of dimensions (before reduction)
+p = 2; 
+% arrange data vectors as rows
+X = [cluster1';cluster2'; cluster3'; cluster4'];
+% find both x and y's mean - empirical mean vector
+u = (1/n)*sum(X);
+% subtract from the mean - Thus achieving centering
+B = X - ones(52,1)*u;
+
 
 % Plot the data after centering it around the Origin
 figure(2);
-scatter(cluster1(1,:), cluster1(2,:), 'g'); 
+scatter(B(1:13,1), B(1:13,2), 'g'); 
 hold on;
-scatter(cluster2(1,:), cluster2(2,:), 'b');
+scatter(B(14:26,1), B(14:26,2), 'b');
 hold on;
-scatter(cluster3(1,:), cluster3(2,:), 'r');
+scatter(B(27:39,1), B(27:39,2), 'r');
 hold on;
-scatter(cluster4(1,:), cluster4(2,:), 'c');
+scatter(B(40:52,1), B(40:52,2), 'c');
 hold on;
 legend('cluster 1','cluster 2','cluster 3','cluster 4');
 
-n = 52;
-p = 2;
-X = [cluster1';cluster2'; cluster3'; cluster4'];
 
-
-C = (X'*X)/(n-1);
+C = (B'*B)/(n-1);
 % we get a column vector of eigen values - the first will be the one with
 % the largest magnitude
 E = svds(C);
