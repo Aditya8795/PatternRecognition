@@ -1,3 +1,5 @@
+% Implementation of PCA
+
 load TRAINTEST2D
 
 cluster1 = TRAIN{1,6}{1,1}; % Green
